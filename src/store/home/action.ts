@@ -2,24 +2,24 @@ import * as home from "./action_type";
 
 // 保存表单数据
 export const saveFormData = (value: object, datatype: string) => {
-  return {
-    type: home.SAVEFORMDATA,
-    value,
-    datatype
-  };
+    return {
+        type: home.SAVEFORMDATA,
+        value,
+        datatype
+    };
 };
 
 // 保存图片地址
 export const saveImg = (path: string) => {
-  return {
-    type: home.SAVEIMG,
-    path
-  };
+    return {
+        type: home.SAVEIMG,
+        path
+    };
 };
 
 // 保存图片地址
 export const clearData = () => {
-  return {
-    type: home.CLEARDATA
-  };
+    return {
+        type: home.CLEARDATA
+    };
 };
