@@ -9,7 +9,7 @@ import sty from './app.scss';
 import LeftMenu from './components/menu/menu';
 import { Icon, Breadcrumb, Tooltip } from 'antd';
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1328618_4lg6ndyikrq.js',
+    scriptUrl: '//at.alicdn.com/t/font_1510260_21n5who1zh1.js',
   });
 
 
@@ -32,11 +32,11 @@ class App extends Component {
                         <div className={sty.header}>
                             <div className={sty.control}>
                                 <span className={sty.icon}>
-                                    <Icon type="menu-fold" style={{ fontSize: '18px' }} />
+                                    <Icon type="menu-fold" style={{ fontSize: '16px' }} />
                                 </span>
 
                                 <span className={classNames(sty.icon)}>
-                                    <Icon type="redo" style={{ fontSize: '18px' }} />
+                                    <IconFont type="iconshuaxin" style={{ fontSize: '16px' }} />
                                 </span>
 
                                 <span className={sty.breadcrumb}>
@@ -58,13 +58,16 @@ class App extends Component {
 
                                 <span className={sty.icon}>
                                     <Tooltip placement="bottom" title="没有日志或新的消息">
-                                        <Icon type="message" style={{ fontSize: '16px' }} />
+                                        <IconFont type="iconrecord_on" style={{ fontSize: '22px' }} />
                                     </Tooltip>
                                 </span>
 
                                 <span className={sty.icon}>
-                                 <IconFont type="icon-yuandiancaidan"></IconFont>
+                                    <IconFont type="iconquanping" style={{ fontSize: '18px' }}></IconFont>
+                                </span>
 
+                                <span className={sty.icon}>
+                                    <IconFont type="iconicon--" style={{ fontSize: '22px' }}></IconFont>
                                 </span>
 
                             </div>
