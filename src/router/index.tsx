@@ -32,7 +32,12 @@ export default class RouteConfig extends Component {
         path: "/user",
         component: asyncComponent(() => import("../pages/user/user")),
     
-      }
+      },
+      // {  
+      //   path: "/login",
+      //   component: asyncComponent(() => import("../pages/login/login")),
+    
+      // }
     
     ];
 

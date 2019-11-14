@@ -37,18 +37,17 @@ class Home extends Component<appState, object> {
         this.props.saveImg('http://');
 
     };
-    
+
     render() {
 
-        const {formData} = this.props;
-        const demosy = classNames(style.text, 'text');
-       
+        const { formData } = this.props;
+
         return (
             <div className="hello">
-                <div className={demosy}>hello ts</div>
+                <div className={classNames(style.text, 'text')}>hello ts</div>
                 <Button type="primary" size="small" className={style.myButton} onClick={this.onBut} >按钮</Button>
                 <div className={style.greeting}>
-                   {this.state.name}  {formData.imgpath}
+                    {this.state.name}  {formData.imgpath}
                 </div>
             </div>
         );

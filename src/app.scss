@@ -1,0 +1,84 @@
+
+:global {
+    .app {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        overflow: hidden;
+    }
+
+}
+
+.left_menu {
+    width: 256px;
+    height: 100vh;
+    background: #001529;
+   
+    .logo {
+        height: 63px;
+        line-height: 63px;
+        width: 100%;
+        text-align: center;
+    }
+    .logo img {
+        height: 80%;
+        vertical-align: middle;
+    }
+   
+}
+
+.right_content {
+    flex: 1;
+    .header {
+        height: 108px;
+        width: 100%;
+        @include border(bottom);
+        .control {
+            height: 64px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            .icon {
+                padding: 0 10px;
+                height: 64px;
+                display: inline-block;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+            }
+            .icon_refresh {
+                padding: 0 20px;
+
+            }
+            .breadcrumb {
+                flex: 1;
+                padding-left: 10px;
+            }
+            .search_input {
+                width: 100px;
+                input {
+                    border: none;
+                }
+                input::-webkit-input-placeholder {
+                    color: #c5c8ce;
+                }
+
+            }
+            
+
+
+        }
+        .tabs {
+            height: 44px;
+            width: 100%;
+
+        }
+    }
+
+    .router_context {
+
+    }
+
+
+}
