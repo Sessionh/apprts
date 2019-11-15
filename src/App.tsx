@@ -2,18 +2,27 @@ import React, { Component } from 'react';
 import RouterConfig from './router/index';
 import {
     BrowserRouter as Router
-    
+
 } from 'react-router-dom';
 import classNames from 'classnames';
 import sty from './app.scss';
 import LeftMenu from './components/menu/menu';
-import { Icon, Breadcrumb, Tooltip } from 'antd';
+import { Icon, Breadcrumb, Tooltip, Tag } from 'antd';
+import MyTag from './components/myTag/myTag';
+
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1510260_21n5who1zh1.js',
-  });
+    scriptUrl: '//at.alicdn.com/t/font_1510260_9iai7eij1nm.js',
+});
 
 
 class App extends Component {
+
+    // tag 关闭监听
+    tagOnClose() {
+        console.log(22)
+       
+
+    };
 
     render() {
 
@@ -45,7 +54,7 @@ class App extends Component {
                                             首页
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item href="">
-                                          
+
                                             <span>Application List</span>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item>Application</Breadcrumb.Item>
@@ -70,9 +79,58 @@ class App extends Component {
                                     <IconFont type="iconicon--" style={{ fontSize: '22px' }}></IconFont>
                                 </span>
 
+                                <span className={sty.userImg}>
+                                    <img src="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" alt=""></img>
+                                    <span className={sty.userName}>
+                                        张三
+                                    </span>
+                                </span>
+                                <span className={sty.icon}>
+                                    <IconFont type="icontubiao_gengduocaidan" style={{ fontSize: '14px', fontWeight: 300, transform: 'rotate(270deg)' }}></IconFont>
+                                </span>
+
+
                             </div>
                             <div className={sty.tabs}>
-                                44
+                                <span className={sty.icon}>
+                                    <Icon type="left" style={{fontSize: '14px'}}/>
+                                </span>
+
+                                <div className={sty.content}>
+
+                                    <div className={sty.tab_list}>
+                                        {/* <Tag style={{fontSize: '14px'}}>首页</Tag>
+                                        <Tag closable style={{fontSize: '14px'}}>控制台</Tag> */}
+                                        <MyTag color="#ff" onClose={this.tagOnClose}>测试</MyTag>
+                                        <MyTag color="#ff">测试1</MyTag>
+                                        {/* <MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1临水临电临水临电乐山电力</MyTag>
+                                        <MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1临水临电乐山电力死</MyTag><MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1</MyTag>
+                                        <MyTag color="#ff">测试1累死了多少了多少了</MyTag>
+
+                                        <MyTag color="#ff">测试1</MyTag> */}
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div className={sty.icon}>
+                                    <Icon type="right" style={{ fontSize: '14px' }} />
+                                </div>
+
+                                <div className={sty.tag_action}>
+                                    <Icon type="down" style={{ fontSize: '14px' }} />
+                                </div>
+
+                                
+
                             </div>
 
                         </div>

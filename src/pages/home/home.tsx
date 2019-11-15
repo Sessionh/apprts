@@ -20,6 +20,8 @@ interface appState {
 }
 
 
+
+
 class Home extends Component<appState, object> {
 
     constructor(props: appState) {
@@ -38,12 +40,14 @@ class Home extends Component<appState, object> {
 
     };
 
+   
+
     render() {
 
         const { formData } = this.props;
 
         return (
-            <div className="hello">
+            <div className={style.my_home}>
                 <div className={classNames(style.text, 'text')}>hello ts</div>
                 <Button type="primary" size="small" className={style.myButton} onClick={this.onBut} >按钮</Button>
                 <div className={style.greeting}>
