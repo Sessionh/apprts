@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { saveImg } from '../../store/home/action';
+import { saveIsMenuClose } from '../../store/home/action';
 import style from './user.scss';
 
 
@@ -13,7 +13,7 @@ interface actionInt {
 }
 
 interface appState {
-    saveImg: Function;
+    saveIsMenuClose: Function;
     formData: actionInt;
 }
 
@@ -32,7 +32,7 @@ class User extends Component<appState, object> {
     };
 
     onBut = () => {
-        this.props.saveImg('http://');
+        this.props.saveIsMenuClose(false);
 
     };
     
@@ -51,6 +51,6 @@ class User extends Component<appState, object> {
 export default connect((state: any) => ({
     formData: state.formData
 }), {
-    saveImg
+    saveIsMenuClose
 })(User);
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
-import { saveImg } from '../../store/home/action';
+import { saveIsMenuClose } from '../../store/home/action';
 
 interface actionInt {
     orderSum?: string;
@@ -10,7 +10,7 @@ interface actionInt {
 }
 
 interface appState {
-    saveImg: Function;
+    saveIsMenuClose: Function;
     formData: actionInt;
 }
 class Login extends Component<appState> {
@@ -27,4 +27,4 @@ class Login extends Component<appState> {
 export default connect((state: any) => {
    
 
-}, {saveImg})(Login);
+}, {saveIsMenuClose})(Login);

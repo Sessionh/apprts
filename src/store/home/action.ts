@@ -1,25 +1,11 @@
 import * as home from "./action_type";
 
-// 保存表单数据
-export const saveFormData = (value: object, datatype: string) => {
-    return {
-        type: home.SAVEFORMDATA,
-        value,
-        datatype
-    };
-};
 
-// 保存图片地址
-export const saveImg = (path: string) => {
+// 控制左侧菜单
+export const saveIsMenuClose = (value: boolean) => {
+    
     return {
-        type: home.SAVEIMG,
-        path
-    };
-};
-
-// 保存图片地址
-export const clearData = () => {
-    return {
-        type: home.CLEARDATA
+        type: home.SAVEISMENUCLOSE,
+        value
     };
 };

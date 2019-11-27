@@ -1,11 +1,19 @@
 import * as home from "./action_type";
 
+
+
 let defaultState = {
-  orderSum: "", //金额
-  name: "张三", //姓名
-  phoneNo: "", //手机号
-  imgpath: "" //图片地址
+  isMenuClose: false, // 控制左侧菜单关闭
+  menus: [
+    {
+      id: 1,
+      text: '首页',
+      icon: 'appstore'
+    }
+  ]
+ 
 };
+
 interface actionInt {
   type?: string;
   datatype?: any;
@@ -16,12 +24,8 @@ interface actionInt {
 // 首页表单数据
 export const formData = (state = defaultState, action: actionInt = {}): any => {
   switch (action.type) {
-    case home.SAVEFORMDATA:
-      return { ...state, ...{ [action.datatype]: action.value } };
-    case home.SAVEIMG:
-      return { ...state, ...{ imgpath: action.path } };
-    case home.CLEARDATA:
-      return { ...state, ...defaultState };
+    case home.SAVEISMENUCLOSE:
+      return { ...state, ...{isMenuClose : action.value} };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { saveImg } from '../../store/home/action';
+import { saveIsMenuClose } from '../../store/home/action';
 import Button from 'antd/es/button';
 import style from './home.scss';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ interface actionInt {
 }
 
 interface appState {
-    saveImg: Function;
+    saveIsMenuClose: Function;
     formData: actionInt;
 }
 
@@ -36,11 +36,12 @@ class Home extends Component<appState, object> {
         name: 'hello world'
     };
 
-    onBut = () => {
+     onBut = async () => {
         new throttle1(() => {
             console.log(22)
         }, 1000, 2000)
-        this.props.saveImg('http://')
+        await this.props.saveIsMenuClose(true);
+        console.log( this.props.formData)
         const time = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
         
         console.log(time)
@@ -74,6 +75,6 @@ class Home extends Component<appState, object> {
 export default connect((state: any) => ({
     formData: state.formData
 }), {
-    saveImg
+    saveIsMenuClose
 })(Home);
 
