@@ -38,8 +38,11 @@
     width: 100%;
     margin-left: 256px;
     .header {
-        height: 108px;
+        height: 64px;
         width: 100%;
+        position: relative;
+       
+        z-index: 10;
         // @include border(bottom);
        
         .control {
@@ -96,77 +99,23 @@
 
 
         }
-        .tabs {
-            height: 44px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-            // overflow: hidden;
-            .tag_action {
-                width: 32px;
-                height: 32px;
-                background: #fff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                cursor: pointer;
-                z-index: 10;
-                
-               
-
-            }
-            .icon {
-                height: 32px;
-                width: 32px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-
-            }
-
-            
-           
-            
-          
-           
-            .content {
-                height: 34px;
-                position: relative;
-                width: 100%;
-                flex: 1;
-                overflow: hidden;
-                // margin: 0 50px;
-              
-                .tab_list {
-                    width: auto;
-                    height: 32px;
-                    position: absolute;
-                    z-index: 5;
-                   
-                    white-space: nowrap;
-                    transition: left .3s ease;
-                    // transform: translateX(-18px);
-                    top: 0;
-                    left: 0;
-                   
-                }
-                
-
-            }
-         
-         
-            
-
-        }
+        
 
     }
 
     .router_context {
+        position: relative;
+        z-index: 5;
+        height: calc(100vh - 108px);
+       
+        overflow: auto;
+       
 
     }
 
 
+}
+
+.demos {
+    color: red;
 }

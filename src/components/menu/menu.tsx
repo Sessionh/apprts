@@ -7,21 +7,55 @@ const { SubMenu } = Menu;
 
 // }
 
-// let menus = [
-//     {
-//         id: 1,
-//         path: '/',
-//         name: 'home',
-//         icon: 'mail',
-//         children: [
-//             {
+let menus = [
+    {
+        id: 1,
+        text: '首页',
+        icon: 'appstore',
+        children: [
+            {
+                id: 1,
+                path: '/sub1',
+                name: 'sub1',
+                text: '测试'
 
-//             }
-//         ]
+            },
+            {
+                id: 2,
+                path: '/sub2',
+                name: 'subN2',
+                text: '中途'
+
+            },
+            {
+                id: 3,
+                path: '/sub3',
+                name: 'sub3',
+                text: 'sub3',
+                children: [
+                    {
+                        id: 1,
+                        path: '/subName1',
+                        name: 'subName1',
+                        text: '子菜单1'
+        
+                    },
+                    {
+                        id: 2,
+                        path: '/subName2',
+                        name: 'subName2',
+                        text: '子菜单2'
+        
+                    },
+                   
+                ]
+
+            }
+        ]
 
 
-//     }
-// ]
+    }
+]
 
 /**
  * @description: 左侧菜单栏
@@ -34,7 +68,7 @@ class LeftMenu extends Component<any> {
     //     super(props);
 
     // };
-    
+
     handleClick = (e: any) => {
         console.log('click ', e);
     };
@@ -45,58 +79,51 @@ class LeftMenu extends Component<any> {
                 onClick={this.handleClick}
                 style={{ width: 256 }}
                 theme={'dark'}
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
+                defaultSelectedKeys={['sub1']}
+                defaultOpenKeys={['1']}
+              
                 mode="inline"
             >
-                <SubMenu
-                    key="sub1"
-                    title={
-                        <span>
-                            <Icon type="mail" />
-                            <span>Navigation One</span>
-                        </span>
-                    }
-                >
-                    <Menu.ItemGroup key="g1" title="Item 1">
-                        <Menu.Item key="1">Option 1</Menu.Item>
-                        <Menu.Item key="2">Option 2</Menu.Item>
-                    </Menu.ItemGroup>
-                    <Menu.ItemGroup key="g2" title="Item 2">
-                        <Menu.Item key="3">Option 3</Menu.Item>
-                        <Menu.Item key="4">Option 4</Menu.Item>
-                    </Menu.ItemGroup>
-                </SubMenu>
-                <SubMenu
-                    key="sub2"
-                    title={
-                        <span>
-                            <Icon type="appstore" />
-                            <span>Navigation Two</span>
-                        </span>
-                    }
-                >
-                    <Menu.Item key="5">Option 5</Menu.Item>
-                    <Menu.Item key="6">Option 6</Menu.Item>
-                    <SubMenu key="sub3" title="Submenu">
-                        <Menu.Item key="7">Option 7</Menu.Item>
-                        <Menu.Item key="8">Option 8</Menu.Item>
-                    </SubMenu>
-                </SubMenu>
-                <SubMenu
-                    key="sub4"
-                    title={
-                        <span>
-                            <Icon type="setting" />
-                            <span>Navigation Three</span>
-                        </span>
-                    }
-                >
-                    <Menu.Item key="9">Option 9</Menu.Item>
-                    <Menu.Item key="10">Option 10</Menu.Item>
-                    <Menu.Item key="11">Option 11</Menu.Item>
-                    <Menu.Item key="12">Option 12</Menu.Item>
-                </SubMenu>
+                {
+                    menus.map((item) => (
+                            <SubMenu
+                                key={item.id}
+                                title={
+                                    <span>
+                                        <Icon type={item.icon} />
+                                        <span>{item.text}</span>
+                                    </span>
+                                }
+                            >
+                                {
+                                    item.children.map((itemSub) => {
+                                        if(itemSub.children && itemSub.children.length > 0) {
+                                            return (
+                                                <SubMenu key={itemSub.name} title={item.text}>
+                                                    {
+                                                        itemSub.children.map(itemSub2 => (
+                                                            <Menu.Item key={itemSub2.name}>{itemSub2.text}</Menu.Item>
+                                                        ))
+                                                    }
+                                                </SubMenu>
+
+                                            )
+                                        } else {
+                                            return (
+                                                <Menu.Item key={itemSub.name}>{itemSub.text}</Menu.Item>
+                                            )
+                                        }
+
+
+                                    })
+                                }
+                             
+                            </SubMenu>
+                    )
+                    )
+                }
+
+                
             </Menu>
         )
     }

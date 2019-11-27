@@ -4,6 +4,7 @@ import { saveImg } from '../../store/home/action';
 import Button from 'antd/es/button';
 import style from './home.scss';
 import classNames from 'classnames';
+import {throttle1, formatDate} from '../../utils/util'
 
 
 
@@ -36,9 +37,21 @@ class Home extends Component<appState, object> {
     };
 
     onBut = () => {
-        this.props.saveImg('http://');
-
+        new throttle1(() => {
+            console.log(22)
+        }, 1000, 2000)
+        this.props.saveImg('http://')
+        const time = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
+        
+        console.log(time)
+    
     };
+ 
+    test = () => {
+       
+        console.log(22)
+
+    }
 
    
 
