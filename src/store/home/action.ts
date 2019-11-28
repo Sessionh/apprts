@@ -1,9 +1,15 @@
 import * as home from "./action_type";
 
-
+interface menuType {
+    id: number;
+    text: string;
+    icon: string;
+    name: string;
+    children: Array<menuType>
+  }
 export interface stateType {
     isMenuClose: boolean;
-    menus: Array<object>
+    menus: Array<menuType>
 }
 
 export interface stateFormData {

@@ -49,7 +49,6 @@ class App extends Component<stateFormData> {
                         <MenuType/>
 
                         <div className={sty.router_context}>
-                           {formData.isMenuClose? '33' : '44'}
                             <RouterConfig />
                         </div>
 

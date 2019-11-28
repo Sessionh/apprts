@@ -74,7 +74,7 @@ class LeftMenu extends Component<stateFormData> {
 
     render() {
         const {formData} = this.props;
-        // const menus = formData.menus;
+        const menus = formData.menus;
         return (
             <Menu
                 onClick={this.handleClick}
