@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
-
+import { stateFormData } from '../../store/home/action'
 const { SubMenu } = Menu;
 
-// interface menuType {
 
-// }
 
 let menus = [
     {
@@ -62,7 +61,7 @@ let menus = [
  * @param {type} 
  * @return: 
  */
-class LeftMenu extends Component<any> {
+class LeftMenu extends Component<stateFormData> {
 
     // constructor(props: any) {
     //     super(props);
@@ -74,6 +73,8 @@ class LeftMenu extends Component<any> {
     };
 
     render() {
+        const {formData} = this.props;
+        // const menus = formData.menus;
         return (
             <Menu
                 onClick={this.handleClick}
@@ -129,4 +130,10 @@ class LeftMenu extends Component<any> {
     }
 }
 
-export default LeftMenu;
+export default connect((state: any) => ({
+    formData: state.formData
+}), {
+    
+})(LeftMenu);
+
+// export default LeftMenu;

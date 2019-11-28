@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import { Icon, Breadcrumb, Tooltip } from 'antd';
 import sty from './appHeader.scss';
 import classNames from 'classnames';
 import { IconFont } from '../../utils/util';
+import {saveIsMenuClose,  stateFormData} from '../../store/home/action';
 
-class AppHeader extends Component {
-    onMenuType = () => {
-        console.log('2')
+
+
+
+class AppHeader extends Component<stateFormData> {
+  
+    onMenuType = async () => {
+
+        const {formData, saveIsMenuClose} = this.props;
+        const type = formData.isMenuClose? false : true;
+        await saveIsMenuClose(type)
+        console.log('2', this.props.formData)
 
     }
     render() {
+       
+        
 
         return (
             <div className={sty.header}>
@@ -68,4 +80,10 @@ class AppHeader extends Component {
     }
 }
 
-export default AppHeader;
+export default connect((state: any) => ({
+    formData: state.formData
+}), {
+    saveIsMenuClose
+})(AppHeader);
+
+// export default AppHeader;

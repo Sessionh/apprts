@@ -76,10 +76,11 @@
             padding: 0;
             height: 0;
             max-height: 0;
+           
             overflow: hidden;
             border-radius: 5px;
             box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-            transition: max-height .3s ease-out;
+            transition: max-height .3s linear;
 
             .tag_content {
                 display: flex;
@@ -92,6 +93,7 @@
                 }
                
             }
+          
            
             .tag_content:hover {
                 background: #e0dfdf;
@@ -106,6 +108,8 @@
             height: auto;
             max-height: 200px;
             padding: 10px 0;
+           
+          
 
         }
         

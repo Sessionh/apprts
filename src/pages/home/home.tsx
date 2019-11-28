@@ -8,16 +8,14 @@ import {throttle1, formatDate} from '../../utils/util'
 
 
 
-interface actionInt {
-    orderSum?: string;
-    name?: string;
-    phoneNo?: string;
-    imgpath?: string;
+export interface stateType {
+    isMenuClose: boolean;
+    menus: Array<object>
 }
 
 interface appState {
-    saveIsMenuClose: Function;
-    formData: actionInt;
+saveIsMenuClose: (value: boolean) => void;
+formData: stateType;
 }
 
 
@@ -65,7 +63,7 @@ class Home extends Component<appState, object> {
                 <div className={classNames(style.text, 'text')}>hello ts</div>
                 <Button type="primary" size="small" className={style.myButton} onClick={this.onBut} >按钮</Button>
                 <div className={style.greeting}>
-                    {this.state.name}  {formData.imgpath}
+                    {this.state.name}  {formData.isMenuClose? '1' : '0'}
                 </div>
             </div>
         );
