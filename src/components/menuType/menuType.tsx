@@ -4,58 +4,37 @@ import { Icon } from 'antd';
 import sty from './menuType.scss';
 import { IconFont } from '../../utils/util';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { stateFormData, saveTagMenus, saveIsCheckedMenu } from '../../store/home/action';
 
-class menuType extends Component {
+class menuType extends Component<stateFormData> {
     private textInput = React.createRef<HTMLDivElement>();
     private tagParent = React.createRef<HTMLDivElement>();
 
+
     state = {
         tagX: 0,
-        tagIndex: 1,
-        tagList: [
-            {
-                id: 1,
-                name: 'home',
-                text: '主控台',
-                isClose: true
-            },
-            {
-                id: 2,
-                name: 'watch',
-                text: '监控台',
-                isClose: true
-            },
-            {
-                id: 3,
-                name: 'workspace',
-                text: '工作台',
-                isClose: true
-            }
-
-
-        ],
         isMenuHover: false
     };
 
     // tag 关闭监听
     tagOnClose = (item?: any) => {
 
-        console.log(item)
-        let { tagList } = this.state;
-        tagList = tagList.filter((ret) => ret.id !== item.id);
-        this.setState({
-            tagList
-        })
+        let { formData, saveTagMenus } = this.props;
+        let tagMenus = formData.tagMenus;
+
+        tagMenus = tagMenus.filter((ret) => ret.name !== item.name);
+        saveTagMenus(tagMenus)
+
 
 
     };
 
-    tagSelect = (item?: any) => {
+    tagSelect = (item: any) => {
+        const { formData, saveIsCheckedMenu } = this.props;
 
-        if (item && item.id) {
-            this.setState({
-                tagIndex: item.id
-            })
+        if (item.name && formData.isCheckedMenu !== item.name) {
+            saveIsCheckedMenu(item.name)
         }
 
     };
@@ -109,9 +88,49 @@ class menuType extends Component {
         this.setState({ tagX })
     };
 
+    tagMenuAction(type: number) { 
+        // 1 关闭左边  2 关闭右边 3 关闭其他 4 全部关闭
+
+        const {formData, saveTagMenus} = this.props;
+        const {tagMenus, isCheckedMenu} = formData;
+        console.log(tagMenus)
+        let tagIndex = 0;
+        
+        tagMenus.forEach((ret, index) => {
+            if (ret.name === isCheckedMenu) {
+                tagIndex = index
+            }
+
+        })
+      
+        switch (type) {
+            case 1:
+                let result =  tagMenus.filter((item, index) => index >= tagIndex);
+                saveTagMenus(result)
+                break;
+            case 2:
+                let result1 =  tagMenus.filter((item, index) => index <= tagIndex);
+                saveTagMenus(result1)
+                break;
+            case 3:
+                let result2 =  tagMenus.filter((item, index) => index == tagIndex);
+                saveTagMenus(result2)
+                break;
+            case 4:
+                saveTagMenus([])
+                break;
+
+
+
+        }
+
+    }
+
 
     render() {
-        const { tagList, tagIndex, tagX, isMenuHover } = this.state;
+        const { tagX, isMenuHover } = this.state;
+        const { formData } = this.props;
+        const { tagMenus, isCheckedMenu } = formData;
         return (
             <div className={sty.tabs} >
                 <span className={sty.icon}>
@@ -122,10 +141,10 @@ class menuType extends Component {
 
                     <div ref={this.textInput} className={sty.tab_list} style={{ transform: `translateX(${tagX}px)` }}>
                         {
-                            tagList.map((item) => (
+                            tagMenus.map((item) => (
                                 <MyTag
-                                    key={item.id}
-                                    color={tagIndex === item.id ? '#1890ff' : ''}
+                                    key={item.name}
+                                    color={isCheckedMenu === item.name ? '#1890ff' : ''}
                                     item={item}
                                     onClose={item.isClose ? this.tagOnClose : undefined}
                                     onSelect={this.tagSelect}>
@@ -153,19 +172,19 @@ class menuType extends Component {
 
                     <div className={sty.tag_menu}>
                         <div className={isMenuHover ? classNames(sty.tag_ul_hover, sty.tag_ul) : sty.tag_ul}>
-                            <div className={sty.tag_content}>
+                            <div className={sty.tag_content} onClick={() => this.tagMenuAction(1)}>
                                 <IconFont type="iconzuojiantou" style={{ fontSize: '14px' }} />
                                 <span className={sty.name}>关闭左边</span>
                             </div>
-                            <div className={sty.tag_content}>
+                            <div className={sty.tag_content} onClick={() => this.tagMenuAction(2)}>
                                 <IconFont type="iconyoujiantou" style={{ fontSize: '14px' }} />
                                 <span className={sty.name}>关闭右边</span>
                             </div>
-                            <div className={sty.tag_content}>
+                            <div className={sty.tag_content} onClick={() => this.tagMenuAction(3)}>
                                 <IconFont type="iconguanbi1" style={{ fontSize: '14px' }} />
                                 <span className={sty.name}>关闭其他</span>
                             </div>
-                            <div className={sty.tag_content}>
+                            <div className={sty.tag_content} onClick={() => this.tagMenuAction(4)}>
                                 <IconFont type="iconguanbi" style={{ fontSize: '12px', padding: '0 2px' }} />
                                 <span className={sty.name}>关闭所有</span>
                             </div>
@@ -184,4 +203,13 @@ class menuType extends Component {
     }
 }
 
-export default menuType;
+
+export default connect((state: any) => ({
+    formData: state.formData
+}), {
+    saveTagMenus,
+    saveIsCheckedMenu
+
+})(menuType);
+
+// export default menuType;

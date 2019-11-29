@@ -1,60 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
-import { stateFormData } from '../../store/home/action'
+import { stateFormData, menuType, saveTagMenus, saveIsCheckedMenu } from '../../store/home/action'
 const { SubMenu } = Menu;
 
 
+interface LeftMenusateType {
+    nowMenu: Array<menuType>
 
-let menus = [
-    {
-        id: 1,
-        text: '首页',
-        icon: 'appstore',
-        children: [
-            {
-                id: 1,
-                path: '/sub1',
-                name: 'sub1',
-                text: '测试'
-
-            },
-            {
-                id: 2,
-                path: '/sub2',
-                name: 'subN2',
-                text: '中途'
-
-            },
-            {
-                id: 3,
-                path: '/sub3',
-                name: 'sub3',
-                text: 'sub3',
-                children: [
-                    {
-                        id: 1,
-                        path: '/subName1',
-                        name: 'subName1',
-                        text: '子菜单1'
-        
-                    },
-                    {
-                        id: 2,
-                        path: '/subName2',
-                        name: 'subName2',
-                        text: '子菜单2'
-        
-                    },
-                   
-                ]
-
-            }
-        ]
-
-
-    }
-]
+}
 
 /**
  * @description: 左侧菜单栏
@@ -67,64 +21,132 @@ class LeftMenu extends Component<stateFormData> {
     //     super(props);
 
     // };
+    state: LeftMenusateType = {
+        nowMenu: []
+    }
+  
 
-    handleClick = (e: any) => {
-        console.log('click ', e);
+     handleClick = async (e: any) => {
+        
+        const { formData, saveTagMenus, saveIsCheckedMenu } = this.props;
+        const {nowMenu} = this.state;
+        
+        let tagMenus = formData.tagMenus;
+        await this.recursionMenus(formData.menus, e.key);
+        if (nowMenu[0]) {
+            const result = tagMenus.filter(ret => ret.name === nowMenu[0].name);
+            if (result.length === 0) {
+                nowMenu[0].isClose = true
+                tagMenus.push(nowMenu[0])
+                await saveTagMenus(tagMenus)
+              
+            }
+            if (nowMenu[0].name && formData.isCheckedMenu !== nowMenu[0].name) {
+                saveIsCheckedMenu(nowMenu[0].name)
+            }
+
+        }
+        
+      
+        this.setState({
+            nowMenu: []
+        })
+     
+
+        
+       
+
+       
+     
+    
+    };
+    recursionMenus = (menu: Array<menuType>, key: string): menuType => {
+        let result:menuType = {}
+        menu.forEach(ret => {
+
+            if (ret.children) {
+                this.recursionMenus(ret.children, key)
+
+            } else {
+
+                if (ret.name === key) {
+                    let nowMenu = this.state.nowMenu;
+                    nowMenu.push(ret)
+                    this.setState({
+                        nowMenu
+                    })
+                   return;
+                  
+                  
+                  
+
+
+                }
+            }
+        })
+      
+
+        return result;
+
+
+        
     };
 
     render() {
-        const {formData} = this.props;
-        const menus = formData.menus;
+        const { formData } = this.props;
+        const { menus, isCheckedMenu } = formData
+       
         return (
             <Menu
                 onClick={this.handleClick}
                 style={{ width: 256 }}
                 theme={'dark'}
-                defaultSelectedKeys={['sub1']}
+                defaultSelectedKeys={[isCheckedMenu]}
+                selectedKeys={[isCheckedMenu]}
                 defaultOpenKeys={['1']}
-              
+
                 mode="inline"
             >
                 {
                     menus.map((item) => (
-                            <SubMenu
-                                key={item.id}
-                                title={
-                                    <span>
-                                        <Icon type={item.icon} />
-                                        <span>{item.text}</span>
-                                    </span>
-                                }
-                            >
-                                {
-                                    item.children.map((itemSub) => {
-                                        if(itemSub.children && itemSub.children.length > 0) {
-                                            return (
-                                                <SubMenu key={itemSub.name} title={item.text}>
-                                                    {
-                                                        itemSub.children.map(itemSub2 => (
-                                                            <Menu.Item key={itemSub2.name}>{itemSub2.text}</Menu.Item>
-                                                        ))
-                                                    }
-                                                </SubMenu>
+                        <SubMenu
+                            key={item.name}
+                            title={
+                                <span>
+                                    <Icon type={item.icon} />
+                                    <span>{item.text}</span>
+                                </span>
+                            }
+                        >
+                            {
+                                item.children ? item.children.map((itemSub) => {
+                                    if (itemSub.children && itemSub.children.length > 0) {
+                                        return (
+                                            <SubMenu key={itemSub.name} title={item.text}>
+                                                {
+                                                    itemSub.children.map(itemSub2 => (
+                                                        <Menu.Item key={itemSub2.name}>{itemSub2.text}</Menu.Item>
+                                                    ))
+                                                }
+                                            </SubMenu>
 
-                                            )
-                                        } else {
-                                            return (
-                                                <Menu.Item key={itemSub.name}>{itemSub.text}</Menu.Item>
-                                            )
-                                        }
+                                        )
+                                    } else {
+                                        return (
+                                            <Menu.Item key={itemSub.name}>{itemSub.text}</Menu.Item>
+                                        )
+                                    }
 
 
-                                    })
-                                }
-                             
-                            </SubMenu>
+                                }) : null
+                            }
+
+                        </SubMenu>
                     )
                     )
                 }
 
-                
+
             </Menu>
         )
     }
@@ -133,7 +155,7 @@ class LeftMenu extends Component<stateFormData> {
 export default connect((state: any) => ({
     formData: state.formData
 }), {
-    
-})(LeftMenu);
+    saveTagMenus,
+    saveIsCheckedMenu
 
-// export default LeftMenu;
+})(LeftMenu);
