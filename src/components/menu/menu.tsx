@@ -51,13 +51,6 @@ class LeftMenu extends Component<stateFormData> {
         this.setState({
             nowMenu: []
         })
-     
-
-        
-       
-
-       
-     
     
     };
     recursionMenus = (menu: Array<menuType>, key: string): menuType => {

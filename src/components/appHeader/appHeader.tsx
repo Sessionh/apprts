@@ -8,8 +8,10 @@ import {saveIsMenuClose,  stateFormData} from '../../store/home/action';
 
 
 
-
 class AppHeader extends Component<stateFormData> {
+    state = {
+        fullScreenType: false
+    }
   
     onMenuType = async () => {
 
@@ -19,8 +21,46 @@ class AppHeader extends Component<stateFormData> {
         console.log('2', this.props.formData)
 
     }
-    render() {
+    fullScreenClick = () => {
+        let {fullScreenType} = this.state;
+        // 全屏
+        this.FullScreen();
+        fullScreenType = fullScreenType ? false : true;
+        this.setState({fullScreenType})
+    };
+    FullScreen = () => {
+        const {fullScreenType} = this.state;
        
+   
+        let main: HTMLElement = document.body;
+        if (fullScreenType) {
+            
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            
+        } else {
+            if (main.requestFullscreen) {
+                main.requestFullscreen();
+            } else if (main.mozRequestFullScreen) {
+                main.mozRequestFullScreen();
+            } else if (main.webkitRequestFullScreen) {
+                main.webkitRequestFullScreen();
+            } else if (main.msRequestFullscreen) {
+                main.msRequestFullscreen();
+            }
+            
+        }
+            
+    }
+    render() {
+       const {fullScreenType} = this.state;
         
 
         return (
@@ -56,8 +96,8 @@ class AppHeader extends Component<stateFormData> {
                         </Tooltip>
                     </span>
 
-                    <span className={sty.icon}>
-                        <IconFont type="iconquanping" style={{ fontSize: '18px' }}></IconFont>
+                    <span className={sty.icon} onClick={this.fullScreenClick}>
+                        <IconFont type={fullScreenType? 'iconzoomin' : 'iconquanping'} style={{ fontSize: fullScreenType? '22px' : '18px' }}></IconFont>
                     </span>
 
                     <span className={sty.icon}>
@@ -85,5 +125,3 @@ export default connect((state: any) => ({
 }), {
     saveIsMenuClose
 })(AppHeader);
-
-// export default AppHeader;

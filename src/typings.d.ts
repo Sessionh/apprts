@@ -39,7 +39,22 @@ interface Window {
     fieldsObject: GAFieldsObject | string,
   ) => void;
 }
+interface Document {
+  exitFullscreen: () => void;
+  mozCancelFullScreen: () => void;
+  webkitExitFullscreen: () => void;
+  fullscreenElement: () => void;
+  mozFullScreenElement: () => void;
+  webkitFullscreenElement: () => void;
+  webkitCancelFullScreen: () => void;
+  msExitFullscreen: () => void;
+}
 
+interface HTMLElement {
+  mozRequestFullScreen: () => void;
+  webkitRequestFullScreen: () => void;
+  msRequestFullscreen: () => void;
+}
 declare let ga: Function;
 
 // preview.pro.ant.design only do not use in your production ;

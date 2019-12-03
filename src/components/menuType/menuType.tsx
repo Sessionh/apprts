@@ -20,8 +20,32 @@ class menuType extends Component<stateFormData> {
     // tag 关闭监听
     tagOnClose = (item?: any) => {
 
-        let { formData, saveTagMenus } = this.props;
+        let { formData, saveTagMenus, saveIsCheckedMenu } = this.props;
         let tagMenus = formData.tagMenus;
+        let tagIndex = -1;
+        tagMenus.forEach((ret, index) => {
+            if (ret.name === item.name) {
+                tagIndex = index
+            }
+
+        })
+
+        if (tagIndex >= 0 && tagMenus.length > 1) {
+            let result = tagMenus[tagIndex - 1];
+            if (result && result.name) {
+                saveIsCheckedMenu(result.name);
+            } else {
+
+                let tagNext = tagMenus[tagIndex + 1];
+                if (tagNext && tagNext.name) {
+                    saveIsCheckedMenu(tagNext.name);
+                }
+
+            }
+        } else {
+            saveIsCheckedMenu('');
+        }
+
 
         tagMenus = tagMenus.filter((ret) => ret.name !== item.name);
         saveTagMenus(tagMenus)
@@ -88,40 +112,37 @@ class menuType extends Component<stateFormData> {
         this.setState({ tagX })
     };
 
-    tagMenuAction(type: number) { 
+    tagMenuAction(type: number) {
         // 1 关闭左边  2 关闭右边 3 关闭其他 4 全部关闭
 
-        const {formData, saveTagMenus} = this.props;
-        const {tagMenus, isCheckedMenu} = formData;
+        const { formData, saveTagMenus } = this.props;
+        const { tagMenus, isCheckedMenu } = formData;
         console.log(tagMenus)
         let tagIndex = 0;
-        
+
         tagMenus.forEach((ret, index) => {
             if (ret.name === isCheckedMenu) {
                 tagIndex = index
             }
 
         })
-      
+
         switch (type) {
             case 1:
-                let result =  tagMenus.filter((item, index) => index >= tagIndex);
+                let result = tagMenus.filter((item, index) => index >= tagIndex);
                 saveTagMenus(result)
                 break;
             case 2:
-                let result1 =  tagMenus.filter((item, index) => index <= tagIndex);
+                let result1 = tagMenus.filter((item, index) => index <= tagIndex);
                 saveTagMenus(result1)
                 break;
             case 3:
-                let result2 =  tagMenus.filter((item, index) => index == tagIndex);
+                let result2 = tagMenus.filter((item, index) => index === tagIndex);
                 saveTagMenus(result2)
                 break;
             case 4:
                 saveTagMenus([])
                 break;
-
-
-
         }
 
     }
@@ -132,7 +153,7 @@ class menuType extends Component<stateFormData> {
         const { formData } = this.props;
         const { tagMenus, isCheckedMenu } = formData;
         return (
-            <div className={sty.tabs} >
+            <div  className={sty.tabs} >
                 <span className={sty.icon}>
                     <Icon type="left" style={{ fontSize: '14px' }} />
                 </span>
