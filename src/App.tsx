@@ -39,7 +39,8 @@ class App extends Component<stateFormData> {
                                   } alt=""></img>
                            
                         </div>
-                        {formData.isMenuClose? null :  <LeftMenu />}
+                        <LeftMenu />
+                       
                        
                     </div>
 

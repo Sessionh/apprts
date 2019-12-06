@@ -3,60 +3,122 @@ import { stateType } from './action';
 
 let menus = [
   {
-    id: 1,
-    text: '首页',
-    name: 'mains',
+    text: 'Dashboard',
+    name: 'Dashboard',
     icon: 'appstore',
     children: [
       {
-        id: 1,
-        path: '/sub1',
-        name: 'sub1',
+        path: '/console',
+        name: 'console',
         text: '主控台'
 
       },
       {
-        id: 2,
-        path: '/sub2',
-        name: 'subN2',
+        path: '/monitor',
+        name: 'monitor',
         text: '监控台'
 
       },
       {
-        id: 3,
-        path: '/sub3',
-        name: 'subN3',
+        path: '/workplace',
+        name: 'workplace',
         text: '工作台'
 
-      },
-      {
-        id: 4,
-        path: '/sub4',
-        name: 'sub4',
-        text: 'sub4',
-        children: [
-          {
-            id: 1,
-            path: '/subName1',
-            name: 'subName1',
-            text: '子菜单1'
-
-          },
-          {
-            id: 2,
-            path: '/subName2',
-            name: 'subName2',
-            text: '子菜单2'
-
-          },
-
-        ]
-
-      }
+      }    
+     
     ]
 
 
-  }
+  },
+  {
+    text: '表单页面',
+    name: 'myForm',
+    icon: 'appstore',
+    children: [
+      {
+        path: '/basicForm',
+        name: 'basicForm',
+        text: '基础表单'
+
+      },
+      {
+        path: '/advancedForm',
+        name: 'advancedForm',
+        text: '高级表单'
+
+      },
+      {
+        path: '/stepForm',
+        name: 'stepForm',
+        text: '分步表单'
+
+      },
+      {
+        path: '/detailForm',
+        name: 'detailForm',
+        text: '表单详情'
+
+      },    
+      // {
+       
+      //   path: '/sub4',
+      //   name: 'sub4',
+      //   text: 'sub4',
+      //   children: [
+      //     {
+      //       path: '/subName1',
+      //       name: 'subName1',
+      //       text: '子菜单1'
+
+      //     },
+      //     {
+      //       path: '/subName2',
+      //       name: 'subName2',
+      //       text: '子菜单2'
+
+      //     },
+
+      //   ]
+
+      // }
+    ]
+
+
+  },
+  {
+    text: '列表页面',
+    name: 'tablePage',
+    icon: 'appstore',
+    children: [
+      {
+        path: '/basicList',
+        name: 'basicList',
+        text: '基础列表'
+
+      },
+      {
+        path: '/cardList',
+        name: 'cardList',
+        text: '卡片列表'
+
+      },
+      {
+        path: '/goodsList',
+        name: 'goodsList',
+        text: '商品列表'
+
+      },
+      {
+        path: '/searchList',
+        name: 'searchList',
+        text: '查询表格'
+
+      }        
+     
+    ]
+
+
+  },
 ]
 
 let defaultState = {

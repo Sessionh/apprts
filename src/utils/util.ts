@@ -1,21 +1,14 @@
 /*
  * @Author: huyh
- * @Github: 
- * @Date: 2019-11-12 10:59:08
- * @LastEditors: huyh
- * @LastEditTime: 2019-11-26 15:19:41
- * @description: 
- */
-/*
- * @Author: huyh
  * @Github:
  * @Date: 2019-11-12 10:59:08
  * @LastEditors: huyh
- * @LastEditTime: 2019-11-20 13:59:30
+ * @LastEditTime: 2019-12-06 10:48:50
  * @description: 工具类
  */
 
  import {Icon} from 'antd';
+ 
 /**
  * @description: 日期转换
  * @param {type} date 转换日期
@@ -57,30 +50,6 @@ export function formatDate(date: Date, fmt: string): string {
  * @param {number} time 触发时间
  * @return: 
  */
-// export function throttle(fun: Function, delay: number, time: number) {
-//     let timeout: number | undefined;
-//     let startTime: number = new Date().getTime();
-  
-
-//     return () => {
-//         console.log(22)
-//         let context = this;
-//         let args = arguments;
-//         let curTime: number = new Date().getTime();
-       
-
-//         clearTimeout(timeout);
-//         // 如果达到了规定的触发时间间隔，触发 handler
-//         if (curTime - startTime >= time) {
-//             fun.apply(context, args);
-//             startTime = curTime;
-//             // 没达到触发间隔，重新设定定时器
-//         } else {
-//             timeout = setTimeout(fun, delay);
-//         }
-//     };
-// };
-
 
 export class throttle1 {
     

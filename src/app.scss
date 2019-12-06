@@ -10,6 +10,9 @@
     body {
         background-color: #f7f7f7
     }
+    .ant-menu-item {
+        user-select: none;
+    }
 
 }
 
@@ -21,6 +24,7 @@
     left: 0;
     top: 0;
     z-index: 10;
+    transition: all .2s;
    
     .logo {
         height: 63px;
@@ -38,10 +42,12 @@
 .right_content {
     width: 100%;
     margin-left: 256px;
+    transition: all .2s;
     .router_context {
         position: relative;
         z-index: 5;
         height: calc(100vh - 108px);
+        padding: 0 20px 12px 20px;
        
         overflow: auto;
        

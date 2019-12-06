@@ -87,16 +87,17 @@ class LeftMenu extends Component<stateFormData> {
 
     render() {
         const { formData } = this.props;
-        const { menus, isCheckedMenu } = formData
+        const { menus, isCheckedMenu, isMenuClose } = formData
        
         return (
             <Menu
                 onClick={this.handleClick}
-                style={{ width: 256 }}
+                style={{ width: isMenuClose? 80 : 256 }}
                 theme={'dark'}
                 defaultSelectedKeys={[isCheckedMenu]}
                 selectedKeys={[isCheckedMenu]}
                 defaultOpenKeys={['1']}
+                inlineCollapsed={isMenuClose}
 
                 mode="inline"
             >
@@ -115,7 +116,7 @@ class LeftMenu extends Component<stateFormData> {
                                 item.children ? item.children.map((itemSub) => {
                                     if (itemSub.children && itemSub.children.length > 0) {
                                         return (
-                                            <SubMenu key={itemSub.name} title={item.text}>
+                                            <SubMenu key={itemSub.name} title={itemSub.text}>
                                                 {
                                                     itemSub.children.map(itemSub2 => (
                                                         <Menu.Item key={itemSub2.name}>{itemSub2.text}</Menu.Item>

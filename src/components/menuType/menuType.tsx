@@ -87,7 +87,7 @@ class menuType extends Component<stateFormData> {
 
         let tagX = this.state.tagX;
         let gapWidth = width - parentWidth > 0 ? width - parentWidth : 0;
-        if (eventDelta > 0) { // 向左移动
+        if (eventDelta < 0 ) { // 向左移动
 
             if (gapWidth < Math.abs(tagX - 100)) {
                 tagX = -gapWidth
@@ -95,7 +95,8 @@ class menuType extends Component<stateFormData> {
                 tagX = tagX - 100;
             }
 
-        } else if (eventDelta < 0 && tagX < 0) { // 向右移动
+        } else if (eventDelta > 0  && tagX < 0) { // 向右移动
+           
 
             if (gapWidth < Math.abs(tagX + 100)) {
                 tagX = gapWidth
@@ -107,8 +108,8 @@ class menuType extends Component<stateFormData> {
             }
 
 
-        }
 
+        }
         this.setState({ tagX })
     };
 
@@ -145,7 +146,62 @@ class menuType extends Component<stateFormData> {
                 break;
         }
 
-    }
+    };
+    
+    tagLeft = () => {
+       
+        let {tagX} = this.state;
+        
+          console.log(tagX)
+       
+        if (tagX < 0) {
+            const tagParentWidth = this.tagParent.current!.offsetWidth
+            let tagXAbs = Math.abs(tagX)
+            if (tagXAbs <= tagParentWidth) {
+                tagX = 0;
+
+            } else {
+                tagX = tagX + tagParentWidth
+
+            }
+          
+          
+          
+            this.setState({
+                tagX
+            })
+
+        }
+      
+
+    };
+
+    tagRight = () => {
+        
+        let {tagX} = this.state;
+        const tagWidth = this.textInput.current!.clientWidth;
+        const tagParentWidth = this.tagParent.current!.clientWidth;
+        let curWidth = tagWidth - tagParentWidth + tagX;
+        if (curWidth > 0) {
+            if (curWidth < tagParentWidth) {
+                tagX = tagX - curWidth
+            } else {
+                tagX = tagX - tagParentWidth
+    
+            }
+            this.setState({
+                tagX
+            })
+
+        }
+        
+        
+       
+       
+       
+      
+
+    };
 
 
     render() {
@@ -154,7 +210,7 @@ class menuType extends Component<stateFormData> {
         const { tagMenus, isCheckedMenu } = formData;
         return (
             <div  className={sty.tabs} >
-                <span className={sty.icon}>
+                <span className={sty.icon} onClick={this.tagLeft}>
                     <Icon type="left" style={{ fontSize: '14px' }} />
                 </span>
 
@@ -179,7 +235,7 @@ class menuType extends Component<stateFormData> {
 
                 </div>
 
-                <div className={sty.icon}>
+                <div className={sty.icon} onClick={this.tagRight}>
                     <Icon type="right" style={{ fontSize: '14px' }} />
                 </div>
 
