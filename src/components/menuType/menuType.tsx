@@ -152,7 +152,7 @@ class menuType extends Component<stateFormData> {
 
         let { tagX } = this.state;
 
-        console.log(tagX)
+        console.log(tagX + '33')
 
         if (tagX < 0) {
             const tagParentWidth = this.tagParent.current!.offsetWidth
