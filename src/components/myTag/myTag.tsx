@@ -4,7 +4,7 @@ import sty from './myTag.scss';
 
 export interface myTagProps {
     onClose?: (item?: any) => void,
-    onSelect?: (item?: any) => void,
+    onSelect?: (item?: any, e?: React.MouseEvent<HTMLElement>) => void,
     color?: string,
     item?: any
 
@@ -12,6 +12,8 @@ export interface myTagProps {
 }
 
 class MyTag extends Component<myTagProps> {
+
+    private textInput = React.createRef<HTMLDivElement>();
     // constructor(props: myTagProps) {
     //     super(props);
 
@@ -27,7 +29,9 @@ class MyTag extends Component<myTagProps> {
     parentClick = (e?: React.MouseEvent<HTMLElement>) => {
         const { onSelect, item } = this.props;
         if (onSelect) {
-            onSelect(item);
+            // console.log(this.textInput.current!.offsetLeft)
+           
+            onSelect(item, e);
         }
 
     }
@@ -53,7 +57,7 @@ class MyTag extends Component<myTagProps> {
     render() {
         const { children, onClose, color} = this.props;
         return (
-            <div className={sty.my_tag} onClick={this.parentClick}>
+            <div ref={this.textInput} className={sty.my_tag} onClick={this.parentClick}>
                 <div className={sty.content}>
                     <span className={sty.tagName} style={{ color: color ? color : '' }}>{children}</span>
                     {

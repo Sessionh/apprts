@@ -54,13 +54,13 @@ class menuType extends Component<stateFormData> {
 
     };
 
-    tagSelect = (item: any) => {
-        const { formData, saveIsCheckedMenu } = this.props;
+    tagSelect = (item: any, e:any) => {
 
+        const { formData, saveIsCheckedMenu } = this.props;
         if (item.name && formData.isCheckedMenu !== item.name) {
             saveIsCheckedMenu(item.name)
         }
-
+        console.log(e.pageX)
     };
 
     menuMouseEnter = (e: any) => {
@@ -87,7 +87,7 @@ class menuType extends Component<stateFormData> {
 
         let tagX = this.state.tagX;
         let gapWidth = width - parentWidth > 0 ? width - parentWidth : 0;
-        if (eventDelta < 0 ) { // 向左移动
+        if (eventDelta < 0) { // 向左移动
 
             if (gapWidth < Math.abs(tagX - 100)) {
                 tagX = -gapWidth
@@ -95,8 +95,8 @@ class menuType extends Component<stateFormData> {
                 tagX = tagX - 100;
             }
 
-        } else if (eventDelta > 0  && tagX < 0) { // 向右移动
-           
+        } else if (eventDelta > 0 && tagX < 0) { // 向右移动
+
 
             if (gapWidth < Math.abs(tagX + 100)) {
                 tagX = gapWidth
@@ -147,13 +147,13 @@ class menuType extends Component<stateFormData> {
         }
 
     };
-    
+
     tagLeft = () => {
-       
-        let {tagX} = this.state;
-        
-          console.log(tagX)
-       
+
+        let { tagX } = this.state;
+
+        console.log(tagX)
+
         if (tagX < 0) {
             const tagParentWidth = this.tagParent.current!.offsetWidth
             let tagXAbs = Math.abs(tagX)
@@ -164,42 +164,39 @@ class menuType extends Component<stateFormData> {
                 tagX = tagX + tagParentWidth
 
             }
-          
-          
-          
+
+
+
             this.setState({
                 tagX
             })
 
         }
-      
+
 
     };
 
     tagRight = () => {
-        
-        let {tagX} = this.state;
+
+        let { tagX } = this.state;
         const tagWidth = this.textInput.current!.clientWidth;
         const tagParentWidth = this.tagParent.current!.clientWidth;
         let curWidth = tagWidth - tagParentWidth + tagX;
+
+        console.log(tagX);
+
         if (curWidth > 0) {
             if (curWidth < tagParentWidth) {
                 tagX = tagX - curWidth
             } else {
                 tagX = tagX - tagParentWidth
-    
+
             }
             this.setState({
                 tagX
             })
 
         }
-        
-        
-       
-       
-       
-      
 
     };
 
@@ -209,7 +206,7 @@ class menuType extends Component<stateFormData> {
         const { formData } = this.props;
         const { tagMenus, isCheckedMenu } = formData;
         return (
-            <div  className={sty.tabs} >
+            <div className={sty.tabs} >
                 <span className={sty.icon} onClick={this.tagLeft}>
                     <Icon type="left" style={{ fontSize: '14px' }} />
                 </span>
@@ -219,14 +216,14 @@ class menuType extends Component<stateFormData> {
                     <div ref={this.textInput} className={sty.tab_list} style={{ transform: `translateX(${tagX}px)` }}>
                         {
                             tagMenus.map((item) => (
-                                <MyTag
-                                    key={item.name}
-                                    color={isCheckedMenu === item.name ? '#1890ff' : ''}
-                                    item={item}
-                                    onClose={item.isClose ? this.tagOnClose : undefined}
-                                    onSelect={this.tagSelect}>
-                                    {item.text}
-                                </MyTag>
+                                    <MyTag
+                                        key={item.name}
+                                        color={isCheckedMenu === item.name ? '#1890ff' : ''}
+                                        item={item}
+                                        onClose={item.isClose ? this.tagOnClose : undefined}
+                                        onSelect={this.tagSelect}>
+                                        {item.text}
+                                    </MyTag>
                             ))
                         }
 
