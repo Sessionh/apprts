@@ -3,7 +3,7 @@
  * @Github:
  * @Date: 2019-11-12 10:59:08
  * @LastEditors: huyh
- * @LastEditTime: 2019-12-06 10:48:50
+ * @LastEditTime: 2019-12-13 15:16:24
  * @description: 工具类
  */
 
@@ -94,7 +94,7 @@ export class throttle1 {
  * @return: 
  */
 export const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_1510260_3timii01fnu.js',
+    scriptUrl: 'iconfont.js',
 });
 
 

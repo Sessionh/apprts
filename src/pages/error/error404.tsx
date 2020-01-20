@@ -4,7 +4,7 @@ class error404 extends Component {
 
     render() {
         return (
-            <div>404</div>
+            <div >404</div>
         )
     }
 }

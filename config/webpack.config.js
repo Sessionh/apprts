@@ -441,6 +441,7 @@ module.exports = function(webpackEnv) {
             {
               test: cssRegex,
               exclude: cssModuleRegex,
+              // exclude: /node_modules/,
               use: getStyleLoaders({
                 importLoaders: 1,
                 // modules: true,
@@ -470,7 +471,11 @@ module.exports = function(webpackEnv) {
             {
               test: sassRegex,
               // exclude: sassModuleRegex,
-              exclude: path.resolve(__dirname, 'src/assest'),
+              
+              exclude: [
+                /node_modules/,
+                path.resolve(__dirname, 'src/assest')
+              ] ,
               use: getStyleLoaders(
                 {
                   importLoaders: 2,

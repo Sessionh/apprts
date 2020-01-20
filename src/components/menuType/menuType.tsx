@@ -152,7 +152,7 @@ class menuType extends Component<stateFormData> {
 
         let { tagX } = this.state;
 
-        console.log(tagX + '33')
+        console.log(tagX)
 
         if (tagX < 0) {
             const tagParentWidth = this.tagParent.current!.offsetWidth
@@ -205,6 +205,7 @@ class menuType extends Component<stateFormData> {
         const { tagX, isMenuHover } = this.state;
         const { formData } = this.props;
         const { tagMenus, isCheckedMenu } = formData;
+        
         return (
             <div className={sty.tabs} >
                 <span className={sty.icon} onClick={this.tagLeft}>

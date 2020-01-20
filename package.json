@@ -2,6 +2,7 @@
   "name": "appts",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@antv/g2": "^3.5.11",
     "@babel/core": "7.6.0",

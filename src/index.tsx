@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assest/reset.css';
+// import './assest/reset.css';
 import 'antd/dist/antd.css';
+
 
 import store from './store/store';
 import { Provider } from 'react-redux';
